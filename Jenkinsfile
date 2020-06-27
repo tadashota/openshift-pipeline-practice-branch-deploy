@@ -31,7 +31,7 @@ pipeline {
             }
         }
 
-        stage('staging deploy') {
+        stage('production deploy') {
             when {
                 expression {
                     return env.GIT_BRANCH == "${deploy_branch_prod}" || params.FORCE_FULL_BUILD
