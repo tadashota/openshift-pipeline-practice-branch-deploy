@@ -21,7 +21,7 @@ pipeline {
             }
             steps {
                 echo "staging deploy"
-                sctipt {
+                script {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_stag}") {
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
