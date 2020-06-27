@@ -1,6 +1,6 @@
 #!groovy
-def deploy_branch_stag = "staging"
-def deploy_branch_prod = "master"
+def deploy_branch_stag = "origin/staging"
+def deploy_branch_prod = "origin/master"
 def deploy_project_stag = "user1-app-stag"
 def deploy_project_prod = "user1-app-prod"
 
