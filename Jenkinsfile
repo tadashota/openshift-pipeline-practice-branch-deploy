@@ -19,7 +19,6 @@ pipeline {
                     return env.GIT_BRANCH == "${deploy_branch_stag}" || params.FORCE_FULL_BUILD
                 }
             }
-
             steps{
                 echo "staging deploy"
                 openshift.withCluster() {
@@ -28,7 +27,11 @@ pipeline {
                     }
                 }
             }
-
+            when {
+                expression {
+                    return env.GIT_BRANCH == "${deploy_branch_prod}" || params.FORCE_FULL_BUILD
+                }
+            }
             steps{
                 echo "production deploy"
                 openshift.withCluster() {
