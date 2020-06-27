@@ -21,12 +21,12 @@ pipeline {
             }
             steps {
                 echo "staging deploy"
-
+                sctipt {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_stag}") {
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
-
+                    }
                 }
             }
         }
@@ -39,12 +39,12 @@ pipeline {
             }
             steps {
                 echo "production deploy"
-
+                script {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_prod}") {
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
-
+                    }
                 }
             }
         }
