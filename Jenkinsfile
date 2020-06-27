@@ -12,14 +12,14 @@ pipeline {
         }
     }
 
-    stages{
-        stage('staging deploy'){
+    stages {
+        stage('staging deploy') {
             when {
                 expression {
                     return env.GIT_BRANCH == "${deploy_branch_stag}" || params.FORCE_FULL_BUILD
                 }
             }
-            steps{
+            steps {
                 echo "staging deploy"
                 script {
                     openshift.withCluster() {
@@ -31,13 +31,13 @@ pipeline {
             }
         }
 
-        stage('staging deploy'){
+        stage('staging deploy') {
             when {
                 expression {
                     return env.GIT_BRANCH == "${deploy_branch_prod}" || params.FORCE_FULL_BUILD
                 }
             }
-            steps{
+            steps {
                 echo "production deploy"
                 sctipt {
                     openshift.withCluster() {
