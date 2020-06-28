@@ -4,7 +4,7 @@ Jenkinsのジョブを利用してリポジトリ内のマニフェストをOpen
 
 ![overview](branch-deploy-overview.png)
 
-### overview
+## overview
 
 ##### ステージング環境へのデプロイ
 
@@ -40,7 +40,7 @@ Jenkinsのジョブを利用してリポジトリ内のマニフェストをOpen
 
 
 
-### 動作確認
+## 動作確認
 
 ##### 初期状態
 
