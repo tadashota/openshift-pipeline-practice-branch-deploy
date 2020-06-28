@@ -50,9 +50,11 @@ $ oc get pod --all-namespaces
 /snip/
 user1-app-prod                                          nginx-68b47b4d58-c8cws                                            1/1     Running     0          22m
 user1-app-stag                                          nginx-68b47b4d58-wzvr9                                            1/1     Running     0          41m
+
 //本番環境
 $ oc describe pod nginx-68b47b4d58-c8cws -n user1-app-prod | grep "Image:"
     Image:          nginx:1.11
+
 //ステージング環境
 $ oc describe pod nginx-68b47b4d58-wzvr9 -n user1-app-stag | grep "Image:"
     Image:          nginx:1.11
@@ -82,9 +84,11 @@ $ oc get pod --all-namespaces
 /snip/
 user1-app-prod                                          nginx-68b47b4d58-c8cws                                            1/1     Running     0          39m
 user1-app-stag                                          nginx-7856959c59-wtl5s                                            1/1     Running     0          14s
+
 //本番環境
 $ oc describe pod nginx-68b47b4d58-c8cws -n user1-app-prod | grep "Image:"
     Image:          nginx:1.11
+
 //ステージング環境
 $ oc describe pod nginx-7856959c59-wtl5s -n user1-app-stag | grep "Image:"
     Image:          nginx:1.12
@@ -108,9 +112,11 @@ $ oc get pod --all-namespaces
 /snip/
 user1-app-prod                                          nginx-7856959c59-wbln9                                            1/1     Running       0          7s
 user1-app-stag                                          nginx-7856959c59-wtl5s                                            1/1     Running       0          13m
+
 //本番環境
 $ oc describe pod nginx-7856959c59-wbln9 -n user1-app-prod | grep "Image:"
     Image:          nginx:1.12
+
 //ステージング環境
 $ oc describe pod nginx-7856959c59-wtl5s -n user1-app-stag | grep "Image:"
     Image:          nginx:1.12
