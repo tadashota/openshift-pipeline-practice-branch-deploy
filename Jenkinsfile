@@ -26,7 +26,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_stag}") {
                             // Apply application manifests
-                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project} -f -"
+                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project_stag} -f -"
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
                     }
@@ -47,7 +47,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_prod}") {
                             // Apply application manifests
-                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project} -f -"
+                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project_prod} -f -"
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
                     }
