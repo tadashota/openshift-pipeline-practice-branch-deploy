@@ -1,10 +1,5 @@
-#!groovy
-def deploy_branch_stag = "origin/staging"
-def deploy_branch_prod = "origin/master"
-def deploy_project_stag = "user1-app-stag"
-def deploy_project_prod = "user1-app-prod"
-
 pipeline {
+    // pipelineを実行するagentの設定
     agent {
         kubernetes {
             cloud 'openshift'
@@ -12,10 +7,18 @@ pipeline {
         }
     }
 
+    environment {
+        deploy_branch_stag = "origin/staging"
+        deploy_branch_prod = "origin/master"
+        deploy_project_stag = "user1-app-stag"
+        deploy_project_prod = "user1-app-prod"
+    }
+
     stages {
         stage('staging deploy') {
             when {
                 expression {
+                    // Gitのブランチ名を変数として取得して条件式に使う
                     return env.GIT_BRANCH == "${deploy_branch_stag}" || params.FORCE_FULL_BUILD
                 }
             }
@@ -24,6 +27,8 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_stag}") {
+                            // Apply application manifests
+                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project} -f -"
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
                     }
@@ -34,6 +39,7 @@ pipeline {
         stage('production deploy') {
             when {
                 expression {
+                    // Gitのブランチ名を変数として取得して条件式に使う
                     return env.GIT_BRANCH == "${deploy_branch_prod}" || params.FORCE_FULL_BUILD
                 }
             }
@@ -42,6 +48,8 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject("${deploy_project_prod}") {
+                            // Apply application manifests
+                            // sh "oc process -f template-deploy.yaml | oc apply -n ${deploy_project} -f -"
                             openshift.apply(openshift.process('-f', 'template-deploy.yaml'))
                         }
                     }
