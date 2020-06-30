@@ -8,8 +8,6 @@ pipeline {
     }
 
     environment {
-        deploy_branch_stag = "origin/staging"
-        deploy_branch_prod = "origin/master"
         deploy_project_stag = "user1-app-stag"
         deploy_project_prod = "user1-app-prod"
     }
@@ -17,10 +15,8 @@ pipeline {
     stages {
         stage('staging deploy') {
             when {
-                expression {
-                    // Gitのブランチ名を変数として取得して条件式に使う
-                    return env.GIT_BRANCH == "${deploy_branch_stag}" || params.FORCE_FULL_BUILD
-                }
+                // Gitのブランチ名を変数として取得して条件式に使う
+                environment name: 'GIT_BRANCH', value: 'origin/staging'
             }
             steps {
                 echo "staging deploy"
@@ -38,10 +34,8 @@ pipeline {
 
         stage('production deploy') {
             when {
-                expression {
-                    // Gitのブランチ名を変数として取得して条件式に使う
-                    return env.GIT_BRANCH == "${deploy_branch_prod}" || params.FORCE_FULL_BUILD
-                }
+                // Gitのブランチ名を変数として取得して条件式に使う
+                environment name: 'GIT_BRANCH', value: 'origin/master'
             }
             steps {
                 echo "production deploy"
