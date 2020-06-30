@@ -21,6 +21,7 @@ pipeline {
                 expression {
                     return env.GIT_BRANCH == "${deploy_branch_stag}" || params.FORCE_FULL_BUILD
                 }
+            }
             steps {
                 echo "staging deploy"
                 script {
